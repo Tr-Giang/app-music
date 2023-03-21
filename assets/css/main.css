@@ -54,10 +54,10 @@ body {
 .header .header__cd {
   display: inline-block;
   height: 15rem;
-  border-radius: 50%;
   overflow: hidden;
 }
 .header .header__cd img {
+  border-radius: 50%;
   height: 100%;
   -webkit-animation: around 15s linear infinite;
           animation: around 15s linear infinite;
