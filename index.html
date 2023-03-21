@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play music</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/images/tải xuống.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./assets/css/main.min.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="header">
+          <h3 class="header__title">Now playing:</h3>
+          <h1 class="header__name">No songs selected...</h1>
+          <div class="header__cd">
+            <img
+              src="/assets/images/png-transparent-record-disk-music-record-player-sound-old-vintage-black-music-black-vintage-black-old-thumbnail.png"
+              alt="music img"
+            />
+          </div>
+          <div class="header__control">
+            <div class="header__control__item">
+              <i id="loop" class="fa-solid fa-rotate-right"></i>
+            </div>
+            <div class="header__control__item">
+              <i id="back" class="fa-solid fa-backward-step"></i>
+            </div>
+            <div class="header__control__item header__control__item--active">
+              <i id="pause" class="fa-solid fa-circle-pause"></i>
+              <i id="play" class="fa-solid fa-circle-play"></i>
+            </div>
+            <div class="header__control__item">
+              <i id="next" class="fa-solid fa-forward-step"></i>
+            </div>
+            <div class="header__control__item">
+              <i id="random" class="fa-solid fa-shuffle"></i>
+            </div>
+          </div>
+          <audio class="audio">
+            <source src="" type="audio/mpeg" />
+          </audio>
+          <label class="time-play">
+            <span class="current-time">NaN : NaN</span>
+            <span class="full-time">NaN : NaN</span>
+          </label>
+          <input
+            type="range"
+            class="header__range"
+            name="range"
+            id="range"
+            value="0"
+            min="0"
+            max="100"
+            step="1"
+          />
+        </div>
+
+        <div class="content">
+          <ul class="play-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
