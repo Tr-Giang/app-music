@@ -73,11 +73,12 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 5px 0;
 }
 .header .header__control .header__control__item {
+  padding: 1rem 1.5rem;
   font-size: 1.6rem;
   color: #777;
+  cursor: pointer;
 }
 .header .header__control .header__control__item:active {
   color: #333;
@@ -145,6 +146,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
+  cursor: pointer;
   background-color: #fff;
 }
 .play-list .play-list__item .play-list__item__image {
@@ -196,7 +198,6 @@ body {
   }
   .header .header__control {
     width: 70%;
-    padding: 0;
   }
   .header .header__control .header__control__item {
     font-size: 2rem;

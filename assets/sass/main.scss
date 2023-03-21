@@ -67,10 +67,11 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 5px 0;
     .header__control__item {
+      padding: 1rem 1.5rem;
       font-size: 1.6rem;
       color: #777;
+      cursor: pointer;
       &:active {
         color: #333;
       }
@@ -131,6 +132,7 @@ body {
     justify-content: space-around;
     align-items: center;
     gap: 1rem;
+    cursor: pointer;
 
     background-color: #fff;
     .play-list__item__image {
@@ -175,7 +177,6 @@ body {
     }
     .header__control {
       width: 70%;
-      padding: 0;
       .header__control__item {
         font-size: 2rem;
         &--active {
