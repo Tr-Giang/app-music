@@ -32,86 +32,86 @@ const app = {
         {
             name: 'Em Đồng Ý (I Do)',
             singer: 'Đức Phúc, 911',
-            path: '/assets/music/songs/EmDongYIDo-DucPhucx911-8679310.mp3',
-            image: '/assets/music/imgs/yid.jpg'
+            path: './assets/music/songs/EmDongYIDo-DucPhucx911-8679310.mp3',
+            image: './assets/music/imgs/yid.jpg'
         },
         {
             name: 'Bật Tình Yêu Lên',
             singer: 'Tăng Duy Tân, Hòa Minzy',
-            path: '/assets/music/songs/BatTinhYeuLen-TangDuyTanHoaMinzy-8715666.mp3',
-            image: '/assets/music/imgs/btyl.jpg'
+            path: './assets/music/songs/BatTinhYeuLen-TangDuyTanHoaMinzy-8715666.mp3',
+            image: './assets/music/imgs/btyl.jpg'
         },
         {
             name: 'Nếu Lúc Đó',
             singer: 'tlinh, 2pillz',
-            path: '/assets/music/songs/NeuLucDo-tlinh2pillz-8783613.mp3',
-            image: '/assets/music/imgs/nld.jpg'
+            path: './assets/music/songs/NeuLucDo-tlinh2pillz-8783613.mp3',
+            image: './assets/music/imgs/nld.jpg'
         },
         {
             name: 'Ghệ Iu Dấu Của Em Ơi',
             singer: 'tlinh, 2pillz, WOKEUP',
-            path: '/assets/music/songs/GheIuDauCuaEmOi-tlinh2pillzWOKEUPAT4AM-8677578.mp3',
-            image: '/assets/music/imgs/gidceo.jpg'
+            path: './assets/music/songs/GheIuDauCuaEmOi-tlinh2pillzWOKEUPAT4AM-8677578.mp3',
+            image: './assets/music/imgs/gidceo.jpg'
         },
         {
             name: '11:11',
             singer: 'MiiNa (DREAMeR), RIN9, DREAMeR',
-            path: '/assets/music/songs/1111-MiiNaDREAMeRRIN9DREAMeRVietNam-8721776.mp3',
-            image: '/assets/music/imgs/1111.jpg'
+            path: './assets/music/songs/1111-MiiNaDREAMeRRIN9DREAMeRVietNam-8721776.mp3',
+            image: './assets/music/imgs/1111.jpg'
         },
         {
             name: 'Người Rất Tốt Không Gặp Sẽ Tốt Hơn',
             singer: 'Hiền Hồ',
-            path: '/assets/music/songs/NguoiRatTotKhongGapSeTotHon-HienHo-8738680.mp3',
-            image: '/assets/music/imgs/ntgnth.jpg'
+            path: './assets/music/songs/NguoiRatTotKhongGapSeTotHon-HienHo-8738680.mp3',
+            image: './assets/music/imgs/ntgnth.jpg'
         },
         {
             name: 'Cô Gái Này Là Của Ai?',
             singer: 'KxR, Nhi Nhi',
-            path: '/assets/music/songs/CoGaiNayLaCuaAi-KrixRushDoanQuocVinhNhiNhi-6926198.mp3',
-            image: '/assets/music/imgs/cgnca.jpg'
+            path: './assets/music/songs/CoGaiNayLaCuaAi-KrixRushDoanQuocVinhNhiNhi-6926198.mp3',
+            image: './assets/music/imgs/cgnca.jpg'
         },
         {
             name: 'Rồi Ta Sẽ Ngắm Pháo Hoa Cùng Nhau',
             singer: 'O.lew',
-            path: '/assets/music/songs/RoiTaSeNgamPhaoHoaCungNhau-OlewVietNam-8485329.mp3',
-            image: '/assets/music/imgs/rtsnphcn.jpg'
+            path: './assets/music/songs/RoiTaSeNgamPhaoHoaCungNhau-OlewVietNam-8485329.mp3',
+            image: './assets/music/imgs/rtsnphcn.jpg'
         },
         {
             name: 'Bo Xì Bo',
             singer: 'Hoàng Thùy Linh',
-            path: '/assets/music/songs/BoXiBo-HoangThuyLinh-7702270.mp3',
-            image: '/assets/music/imgs/bxb.jpg'
+            path: './assets/music/songs/BoXiBo-HoangThuyLinh-7702270.mp3',
+            image: './assets/music/imgs/bxb.jpg'
         },
         {
             name: 'Để Tôi Ôm Em Bằng Giai Điệu Này',
             singer: 'Kai Đinh, MIN, GREY D',
-            path: '/assets/music/songs/DeToiOmEmBangGiaiDieuNay-KaiDinhMINGREYD-8416034.mp3',
-            image: '/assets/music/imgs/dtyebgdn.jpg'
+            path: './assets/music/songs/DeToiOmEmBangGiaiDieuNay-KaiDinhMINGREYD-8416034.mp3',
+            image: './assets/music/imgs/dtyebgdn.jpg'
         },
         {
             name: 'Em Là Kẻ Đáng Thương',
             singer: 'Phát Huy T4',
-            path: '/assets/music/songs/EmLaKeDangThuong-PhatHuyT4-8504796.mp3',
-            image: '/assets/music/imgs/elkdt.jpg'
+            path: './assets/music/songs/EmLaKeDangThuong-PhatHuyT4-8504796.mp3',
+            image: './assets/music/imgs/elkdt.jpg'
         },
         {
             name: 'Mong Một Ngày Anh Nhớ Đến Em',
             singer: 'Huỳnh James, Pjnboys',
-            path: '/assets/music/songs/MongMotNgayAnhNhoDenEm-HuynhJamesPjnboys-8653756.mp3',
-            image: '/assets/music/imgs/mmnande.jpg'
+            path: './assets/music/songs/MongMotNgayAnhNhoDenEm-HuynhJamesPjnboys-8653756.mp3',
+            image: './assets/music/imgs/mmnande.jpg'
         },
         {
             name: 'Waiting For You',
             singer: 'MONO, Onionn',
-            path: '/assets/music/songs/WaitingForYou-MONOOnionn-7733882.mp3',
-            image: '/assets/music/imgs/wtfu.jpg'
+            path: './assets/music/songs/WaitingForYou-MONOOnionn-7733882.mp3',
+            image: './assets/music/imgs/wtfu.jpg'
         },
         {
             name: 'Như Anh Đã Thấy Em',
             singer: 'PhucXP, Freak D',
-            path: '/assets/music/songs/NhuAnhDaThayEm-PhucXPFreakD-7370334.mp3',
-            image: '/assets/music/imgs/nadte.jpg'
+            path: './assets/music/songs/NhuAnhDaThayEm-PhucXPFreakD-7370334.mp3',
+            image: './assets/music/imgs/nadte.jpg'
         },
     ],
 
