@@ -147,6 +147,7 @@ const app = {
             let setHeightCD = cdWidth - scrollTop;
             cdElement.style.height = setHeightCD > 0 ? setHeightCD + 'px' : 0;
             cdElement.style.opacity = setHeightCD / cdWidth;
+
         };
 
         // click nút play:
