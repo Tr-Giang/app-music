@@ -53,11 +53,13 @@ body {
     display: inline-block;
     height: 15rem;
     overflow: hidden;
+    border-radius: 50%;
+    border: 6px solid transparent;
+    background-image: conic-gradient(#ee2565 0, #ee2565 50deg, #000 50deg);
 
     img {
       border-radius: 50%;
       height: 100%;
-      animation: around 15s linear infinite;
     }
   }
 
@@ -199,14 +201,12 @@ body {
   }
 }
 
-@keyframes around {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
+.active {
+  background-color: #ee2565 !important;
+  color: #fff;
+  .play-list__item__name,
+  .play-list__item__singer,
+  .play-list__item__more {
+    color: #fff !important;
   }
 }

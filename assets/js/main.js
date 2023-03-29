@@ -12,8 +12,18 @@
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-let cdElement = $('.header__cd');
+let isPausing = false;
+let cdElement = $('.header__cd img');
 let cdWidth = cdElement.offsetWidth;
+const arrayKeyframes = [
+    { transform: 'rotate(360deg)' }
+];
+const objProperties = {
+    duration: 10000,
+    iterations: Infinity,
+};
+const animateElement = cdElement.animate(arrayKeyframes, objProperties);
+
 const headerNameElement = $('.header__name');
 const playElement = $('#play');
 const pauseElement = $('#pause');
@@ -21,8 +31,8 @@ const audioElement = $('.audio');
 const rangePercents = $('#range');
 const nextElement = $('#next');
 const backElement = $('#back');
-let countLoop = 0;
-let countRandom = 0;
+let countLoop = false;
+let countRandom = false;
 const loopElement = $('#loop');
 const randomElement = $('#random');
 
@@ -117,9 +127,10 @@ const app = {
 
     //render HTML :
 
+
     renderHTML: function () {
         let html = this.songs.map((song, index) => {
-            return ` <li class="play-list__item">
+            return ` <li class="play-list__item" data-id= "${index}">
               <div class="play-list__item__image">
                 <img src="${song.image}" alt="image music" />
               </div>
@@ -141,31 +152,63 @@ const app = {
 
     handleEvent: function () {
 
-        //cuộc màn hình:
+        //cuộn màn hình:
         document.onscroll = () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop; //lấy ra xem đã scroll top được bn px.
             let setHeightCD = cdWidth - scrollTop;
             cdElement.style.height = setHeightCD > 0 ? setHeightCD + 'px' : 0;
             cdElement.style.opacity = setHeightCD / cdWidth;
-
         };
+
+        //xử lý CD thump :
+
+        animateElement.pause();
 
         // click nút play:
         playElement.onclick = function () {
-            if (headerNameElement.textContent !== 'No songs selected...') {
+            if (isPausing) {
                 audioElement.play();
-                playElement.style.display = 'none';
-                pauseElement.style.display = 'inline-block';
+            }
+        };
+        //click nút pause:
+        pauseElement.onclick = function () {
+            if (!isPausing) {
+                audioElement.pause();
             }
         };
 
-        //click nút pause:
-        pauseElement.onclick = function () {
-            audioElement.pause();
-            pauseElement.style.display = 'none';
-            playElement.style.display = 'inline-block';
+        //Khi song được play:
+
+        audioElement.onplay = function () {
+
+            isPausing = false;
+            playElement.style.display = 'none';
+            pauseElement.style.display = 'inline-block';
+            animateElement.play();
+
+
+
+            const songElements = $$('.play-list__item');
+            songElements.forEach((songElement) => {
+                if (songElement.classList.contains('active')) songElement.classList.remove('active');
+            });
+
+            let idSongs = Number(audioElement.dataset.id);
+            let songActive = $([`li[data-id="${idSongs}"]`]);
+            songActive.classList.add('active');
+
+            setTimeout(() => {
+                songActive.scrollIntoView({ behavior: "smooth", block: "end" });
+            }, 300);
         };
 
+        //Khi song bị pause:
+        audioElement.onpause = function () {
+            isPausing = true;
+            pauseElement.style.display = 'none';
+            playElement.style.display = 'inline-block';
+            animateElement.pause();
+        };
 
 
         this.addSong();
@@ -193,13 +236,14 @@ const app = {
 
         //lặp lại 1 bài hát
         loopElement.onclick = function () {
-            countLoop++;
-            if (countLoop % 2 == 1) {
+            if (!countLoop) {
+                countLoop = true;
                 audioElement.loop = true;
                 loopElement.style.color = '#222';
                 loopElement.style.transform = 'scale(1.25)';
             }
             else {
+                countLoop = false;
                 audioElement.loop = false;
                 loopElement.style.color = '#777';
                 loopElement.style.transform = 'scale(1)';
@@ -215,159 +259,144 @@ const app = {
         this.nextBackSong();
 
 
-        //random khi next bài
+        //random khi change bài
 
         randomElement.onclick = function () {
-            countRandom++;
-            if (countRandom % 2 == 1) {
-
+            if (!countRandom) {
+                countRandom = true;
                 randomElement.style.color = '#222';
                 randomElement.style.transform = 'scale(1.25)';
+                let arrayRandom = [Number(audioElement.dataset.id)];
 
+                const randomAudio = function () {
+                    randomID = Math.floor(Math.random() * app.songs.length);
+                    if (arrayRandom.includes(randomID)) {
+                        randomAudio();
+                    } else {
+                        audioElement.querySelector('source').src = app.songs[randomID].path;
+                        headerNameElement.innerHTML = app.songs[randomID].name;
+                        $('.header__cd img').src = app.songs[randomID].image;
+                        audioElement.dataset.id = randomID;
+                        arrayRandom.push(randomID);
+                    }
+
+                    if (arrayRandom.length >= 14) arrayRandom = [];
+                };
 
                 //khi hết bài hát thì tự next
                 audioElement.onended = function () {
-                    randomID = Math.floor(Math.random() * app.songs.length);
-                    audioElement.querySelector('source').src = app.songs[randomID].path;
-                    headerNameElement.innerHTML = app.songs[randomID].name;
-                    $('.header__cd img').src = app.songs[randomID].image;
-
-                    audioElement.load();
-                    audioElement.play();
-                    playElement.style.display = 'none';
-                    pauseElement.style.display = 'inline-block';
+                    randomAudio();
+                    app.changeSong();
+                    animateElement.cancel();
                 };
 
 
                 // click next song
                 nextElement.onclick = function () {
-                    randomID = Math.floor(Math.random() * app.songs.length);
-                    audioElement.querySelector('source').src = app.songs[randomID].path;
-                    headerNameElement.innerHTML = app.songs[randomID].name;
-                    $('.header__cd img').src = app.songs[randomID].image;
-
-                    audioElement.load();
-                    audioElement.play();
-                    playElement.style.display = 'none';
-                    pauseElement.style.display = 'inline-block';
+                    randomAudio();
+                    app.changeSong();
+                    animateElement.cancel();
                 };
 
                 //click back song
                 backElement.onclick = function () {
-                    randomID = Math.floor(Math.random() * app.songs.length);
-                    audioElement.querySelector('source').src = app.songs[randomID].path;
-                    headerNameElement.innerHTML = app.songs[randomID].name;
-                    $('.header__cd img').src = app.songs[randomID].image;
-
-                    audioElement.load();
-                    audioElement.play();
-                    playElement.style.display = 'none';
-                    pauseElement.style.display = 'inline-block';
+                    randomAudio();
+                    app.changeSong();
+                    animateElement.cancel();
                 };
             }
             else {
-
+                countRandom = false;
                 randomElement.style.color = '#777';
                 randomElement.style.transform = 'scale(1)';
                 //khi hết bài hát thì tự next
                 app.nextBackSong();
-
             }
         };
 
     },
 
+    // chọn song:
+
     addSong: function () {
-        const songsElement = $$('.play-list__item');
-        songsElement.forEach(function (songElement, index) {
+        const songElements = $$('.play-list__item');
+
+        songElements.forEach(function (songElement, index1) {
             songElement.onclick = function () {
-                let audioObj = app.songs.find((song) => {
-                    return songElement.querySelector('.play-list__item__name').textContent == song.name;
+                let audioObj = app.songs.find((song, index2) => {
+                    return index1 == index2;
                 });
-
                 audioElement.querySelector('source').src = audioObj.path;
-
-                if (headerNameElement.textContent !== audioObj.name) {
-                    audioElement.load();
-                }
-                audioElement.play();
-                playElement.style.display = 'none';
-                pauseElement.style.display = 'inline-block';
-
                 headerNameElement.innerHTML = audioObj.name;
                 $('.header__cd img').src = audioObj.image;
+                if (songElement.dataset.id !== audioElement.dataset.id) {
+                    audioElement.load();
+                }
+                audioElement.dataset.id = index1;
+                audioElement.play();
+                animateElement.cancel();
             };
         });
     },
 
+
+    //thay đổi song:
+    changeSong: function () {
+        audioElement.load();
+        audioElement.play();
+    },
+
+    // next, back song mặc định :
+
     nextBackSong: function () {
-
-        //Default next:
-        audioElement.onended = function () {
-            const idAudioObj = app.songs.findIndex((song) => {
-                return headerNameElement.textContent == song.name;
-            });
-
+        const nextSong = function () {
+            let idAudioObj = Number(audioElement.dataset.id);
             if (idAudioObj < app.songs.length - 1) {
                 audioElement.querySelector('source').src = app.songs[idAudioObj + 1].path;
                 headerNameElement.innerHTML = app.songs[idAudioObj + 1].name;
                 $('.header__cd img').src = app.songs[idAudioObj + 1].image;
+                audioElement.dataset.id = idAudioObj + 1;
             }
             else {
                 audioElement.querySelector('source').src = app.songs[0].path;
                 headerNameElement.innerHTML = app.songs[0].name;
                 $('.header__cd img').src = app.songs[0].image;
-
+                audioElement.dataset.id = 0;
             }
-            audioElement.load();
-            audioElement.play();
-            playElement.style.display = 'none';
-            pauseElement.style.display = 'inline-block';
+        };
+
+        //Default next:
+        audioElement.onended = function () {
+            nextSong();
+            app.changeSong();
+            animateElement.cancel();
         };
 
 
         // click next song
         nextElement.onclick = function () {
-            const idAudioObj = app.songs.findIndex((song) => {
-                return headerNameElement.textContent == song.name;
-            });
-
-            if (idAudioObj < app.songs.length - 1) {
-                audioElement.querySelector('source').src = app.songs[idAudioObj + 1].path;
-                headerNameElement.innerHTML = app.songs[idAudioObj + 1].name;
-                $('.header__cd img').src = app.songs[idAudioObj + 1].image;
-            }
-            else {
-                audioElement.querySelector('source').src = app.songs[0].path;
-                headerNameElement.innerHTML = app.songs[0].name;
-                $('.header__cd img').src = app.songs[0].image;
-
-            }
-            audioElement.load();
-            audioElement.play();
-            playElement.style.display = 'none';
-            pauseElement.style.display = 'inline-block';
+            nextSong();
+            app.changeSong();
+            animateElement.cancel();
         };
 
         //click back song
         backElement.onclick = function () {
-            const idAudioObj = app.songs.findIndex((song) => {
-                return headerNameElement.textContent == song.name;
-            });
+            let idAudioObj = Number(audioElement.dataset.id);
             if (idAudioObj > 0) {
                 audioElement.querySelector('source').src = app.songs[idAudioObj - 1].path;
                 headerNameElement.innerHTML = app.songs[idAudioObj - 1].name;
                 $('.header__cd img').src = app.songs[idAudioObj - 1].image;
+                audioElement.dataset.id = idAudioObj - 1;
             }
             else {
                 audioElement.querySelector('source').src = app.songs[app.songs.length - 1].path;
                 headerNameElement.innerHTML = app.songs[app.songs.length - 1].name;
                 $('.header__cd img').src = app.songs[app.songs.length - 1].image;
+                audioElement.dataset.id = app.songs.length - 1;
             }
-            audioElement.load();
-            audioElement.play();
-            playElement.style.display = 'none';
-            pauseElement.style.display = 'inline-block';
+            app.changeSong();
+            animateElement.cancel();
         };
     },
 

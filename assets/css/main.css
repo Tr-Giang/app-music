@@ -55,12 +55,13 @@ body {
   display: inline-block;
   height: 15rem;
   overflow: hidden;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  background-image: conic-gradient(#ee2565 0, #ee2565 50deg, #000 50deg);
 }
 .header .header__cd img {
   border-radius: 50%;
   height: 100%;
-  -webkit-animation: around 15s linear infinite;
-          animation: around 15s linear infinite;
 }
 .header .header__control {
   width: 50%;
@@ -218,31 +219,12 @@ body {
     width: 80%;
   }
 }
-@-webkit-keyframes around {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  50% {
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
+.active {
+  background-color: #ee2565 !important;
+  color: #fff;
 }
-@keyframes around {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  50% {
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
+.active .play-list__item__name,
+.active .play-list__item__singer,
+.active .play-list__item__more {
+  color: #fff !important;
 }
